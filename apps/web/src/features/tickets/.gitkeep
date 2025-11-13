@@ -1,0 +1,6 @@
+# Tickets feature
+# Contains ticket/support ticket management components and logic
+# - Ticket list, create, edit, view components
+# - Ticket hooks and API calls
+# - Ticket status management
+

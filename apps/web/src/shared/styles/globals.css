@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- BASE COLORS --- */
+@layer base {
+  :root {
+    --black: #0E0F0C;
+    --white: #FFFFFF;
+    --amber: #FFBF00;
+  }
+
+  body {
+    background-color: var(--black);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    @apply antialiased;
+  }
+
+  a {
+    color: var(--amber);
+  }
+
+  a:hover {
+    color: var(--amber);
+  }
+}
+
+/* --- COMPONENT STYLES --- */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium transition;
+    background-color: var(--amber);
+    color: var(--black);
+    border: 1px solid var(--amber);
+    &:hover {
+      @apply bg-black text-amber border-amber cursor-pointer;
+    }
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium transition;
+    background-color: var(--black);
+    color: var(--amber);
+    border: 1px solid var(--amber);
+    &:hover {
+      @apply bg-amber text-black border-black cursor-pointer;
+    }
+  }
+
+  .input {
+    @apply rounded-lg border px-3 py-2 outline-none;
+    border-color: #d4d4d4;
+  }
+
+  .input:focus {
+    border-color: var(--amber);
+    box-shadow: 0 0 0 2px rgba(255, 191, 0, 0.3);
+  }
+}
+
+/* --- UTILITIES STYLES --- */
+@layer utilities {
+  .text-brand {
+    color: var(--amber);
+  }
+
+  .bg-brand {
+    background-color: var(--amber);
+  }
+
+  .border-brand {
+    border-color: var(--amber);
+  }
+
+  .bg-dark {
+    background-color: var(--black);
+  }
+
+  .text-light {
+    color: var(--white);
+  }
+}
+

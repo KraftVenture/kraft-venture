@@ -1,0 +1,6 @@
+# Auth feature
+# Contains authentication-related components, hooks, and utilities
+# - Login/signup components
+# - Auth hooks (useAuth, useSession)
+# - Auth utilities and helpers
+

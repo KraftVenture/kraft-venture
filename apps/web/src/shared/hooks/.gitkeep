@@ -1,0 +1,5 @@
+# Shared hooks
+# Reusable React hooks across the application
+# - Custom hooks for common functionality
+# - Shared business logic hooks
+

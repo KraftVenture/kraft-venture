@@ -1,0 +1,6 @@
+# Projects feature
+# Contains project management components and logic
+# - Project list, create, edit, view components
+# - Project hooks and API calls
+# - Project-related utilities
+

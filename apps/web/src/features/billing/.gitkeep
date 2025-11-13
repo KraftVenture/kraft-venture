@@ -1,0 +1,7 @@
+# Billing feature
+# Contains billing and subscription management components
+# - Invoice list and view components
+# - Payment methods management
+# - Subscription management
+# - Billing hooks and API calls
+
