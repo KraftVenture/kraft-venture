@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,23 +7,22 @@
 /* --- BASE COLORS --- */
 @layer base {
   :root {
-    --black: #0E0F0C;
-    --white: #FFFFFF;
-    --amber: #FFBF00;
+    --black: #0e0f0c;
+    --white: #ffffff;
+    --amber: #ffbf00;
+  }
+
+  html {
+    font-family: "Rubik", system-ui, sans-serif;
   }
 
   body {
     background-color: var(--black);
     color: var(--white);
-    font-family: 'Inter', sans-serif;
     @apply antialiased;
   }
 
-  a {
-    color: var(--amber);
-  }
-
-  a:hover {
+  a.active {
     color: var(--amber);
   }
 }
@@ -81,4 +82,3 @@
     color: var(--white);
   }
 }
-

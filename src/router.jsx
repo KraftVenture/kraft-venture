@@ -5,6 +5,7 @@ import { AdminLayout } from "./layout/AdminLayout";
 import { HomePage } from "./routes/public/HomePage";
 import { PortalDashboard } from "./routes/portal/PortalDashboard";
 import { AdminDashboard } from "./routes/admin/AdminDashboard";
+import About from "./routes/public/About";
 
 /**
  * Main router configuration
@@ -19,6 +20,7 @@ export function Router() {
       {/* Public routes - Marketing site, landing pages */}
       <Route path="/" element={<RootLayout />}>
         <Route index element={<HomePage />} />
+        <Route path="/about" element={<About />} />
         {/* Add more public routes here */}
       </Route>
 

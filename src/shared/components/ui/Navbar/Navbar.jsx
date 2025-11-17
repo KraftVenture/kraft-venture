@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -16,20 +17,29 @@ const Navbar = () => {
       >
         <div className="h-16 flex items-center justify-between gap-4">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2">
+          <NavLink to="/" className="flex items-center gap-2">
             <span className="grid h-8 w-8 place-items-center rounded-full bg-amber text-black font-black">
-              K
+              KV
             </span>
-            <span className="text-white font-semibold tracking-wide">
+            <span className="text-white hover:text-amber font-semibold tracking-wide">
               Kraft Venture
             </span>
-          </a>
+          </NavLink>
 
           {/* Desktop nav */}
           <ul className="hidden lg:flex items-center gap-8 text-white/90">
+            <li>
+              <NavLink
+                to="/"
+                className="hover:text-amber transition"
+                activeClassName="active"
+              >
+                Home
+              </NavLink>
+            </li>
             <li className="group relative">
-              <button className="flex items-center gap-1 hover:text-white transition">
-                Pages
+              <button className="flex items-center gap-1 transition">
+                Services
                 <svg
                   className="h-4 w-4 transition-transform group-hover:translate-y-[1px]"
                   viewBox="0 0 20 20"
@@ -38,51 +48,64 @@ const Navbar = () => {
                   <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
                 </svg>
               </button>
-              {/* Example dropdown (optional) */}
+              {/* dropdown (optional) */}
               <div className="invisible absolute left-0 top-8 min-w-[200px] rounded-xl border border-amber/30 bg-black/95 p-2 opacity-0 shadow-xl transition group-hover:visible group-hover:opacity-100">
-                <a
-                  href="#"
+                <NavLink
+                  to={"/web-design"}
                   className="block rounded-lg px-3 py-2 text-sm text-white/90 hover:bg-white/5"
                 >
-                  Home
-                </a>
-                <a
-                  href="#"
+                  Web Design
+                </NavLink>
+                <NavLink
+                  to="/social-media-marketing"
                   className="block rounded-lg px-3 py-2 text-sm text-white/90 hover:bg-white/5"
                 >
-                  Portfolio
-                </a>
-                <a
-                  href="#"
+                  Social Media Marketing
+                </NavLink>
+                <NavLink
+                  to="/android-app-development"
                   className="block rounded-lg px-3 py-2 text-sm text-white/90 hover:bg-white/5"
                 >
-                  Contact
-                </a>
+                  Android App Development
+                </NavLink>
               </div>
             </li>
             <li>
-              <a href="#" className="hover:text-white transition">
+              <NavLink
+                to="/about"
+                className="hover:text-amber transition"
+                activeClassName="active"
+              >
                 About
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="#" className="hover:text-white transition">
-                Features
-              </a>
+              <NavLink
+                to="/testimonials"
+                className="hover:text-amber transition"
+                activeClassName="active"
+              >
+                Testimonials
+              </NavLink>
             </li>
             <li>
-              <a href="#" className="hover:text-white transition">
-                Pricing
-              </a>
+              <NavLink
+                to="/contact-us"
+                className="hover:text-amber transition"
+                activeClassName="active"
+              >
+                Contact Us
+              </NavLink>
             </li>
           </ul>
 
           {/* CTA */}
-          <a
-            href="#"
+          <NavLink
+            to="/get-in-touch"
             className="
               inline-flex items-center gap-3 rounded-full
-              bg-amber text-black pl-2 pr-4 py-2 font-semibold
+              text-black
+              bg-amber pl-2 pr-4 py-2 font-semibold
               shadow-[0_6px_16px_rgba(255,191,0,0.35)]
               hover:brightness-95 active:scale-[0.99] transition
             "
@@ -98,8 +121,8 @@ const Navbar = () => {
                 />
               </svg>
             </span>
-            Book A Demo
-          </a>
+            Get In Touch
+          </NavLink>
 
           {/* Mobile toggle */}
           <button
