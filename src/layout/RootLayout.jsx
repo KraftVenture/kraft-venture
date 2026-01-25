@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "@/shared/components/ui/Navbar/Navbar";
+import Footer from "../shared/components/ui/Footer/Footer";
 /**
  * Root layout for public routes
  * Used for marketing site, landing pages, and public-facing content
@@ -11,18 +12,12 @@ export function RootLayout() {
       <Navbar />
 
       {/* Main content */}
-      <main>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Outlet />
       </main>
 
       {/* Footer will go here */}
-      <footer className="mt-auto">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <p className="text-center">
-            © {new Date().getFullYear()} Kraft Venture. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

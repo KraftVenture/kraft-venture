@@ -6,6 +6,7 @@ import { HomePage } from "./routes/public/HomePage";
 import { PortalDashboard } from "./routes/portal/PortalDashboard";
 import { AdminDashboard } from "./routes/admin/AdminDashboard";
 import About from "./routes/public/About";
+import ServiceDetailPage from "./routes/public/ServiceDetailPage";
 
 /**
  * Main router configuration
@@ -21,6 +22,7 @@ export function Router() {
       <Route path="/" element={<RootLayout />}>
         <Route index element={<HomePage />} />
         <Route path="/about" element={<About />} />
+        <Route path="/services/:slug" element={<ServiceDetailPage />} />
         {/* Add more public routes here */}
       </Route>
 

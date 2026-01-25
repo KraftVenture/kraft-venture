@@ -2,24 +2,10 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-black text-white">
+    <section className="relative overflow-hidden">
       {/* subtle grid background */}
-      <div className="pointer-events-none absolute inset-0 bg-hero-grid opacity-40" />
-      <div className="relative z-10 mx-auto flex min-h-[80vh] max-w-6xl flex-col items-center px-4 py-16 text-center md:px-8 md:py-24">
-        {/* Top pill */}
-        <div className="mb-8 inline-flex items-center gap-3 rounded-full bg-black/80 px-4 py-2 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
-          <div className="flex -space-x-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-full border border-black bg-amber text-xs font-semibold text-black">
-              KV
-            </div>
-            <div className="h-7 w-7 rounded-full border border-black bg-white/80" />
-            <div className="h-7 w-7 rounded-full border border-black bg-white/60" />
-          </div>
-          <span className="text-xs font-medium text-white/80">
-            Where energy & innovation meet.
-          </span>
-        </div>
-
+      <div className="pointer-events-none absolute inset-0 opacity-40" />
+      <div className="relative z-10 mx-auto flex min-h-[50vh] flex-col items-center px-4 py-8 text-center md:px-8 md:py-24">
         {/* Heading */}
         <h1 className="max-w-3xl text-3xl font-semibold leading-tight sm:text-4xl md:text-5xl md:leading-tight lg:text-6xl">
           Powering Your Projects
