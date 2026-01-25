@@ -149,7 +149,7 @@ export default function TestimonialsSection() {
   }, []);
 
   return (
-    <section className="relative">
+    <section className="relative" id="testimonials">
       <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6 md:px-8 md:py-20">
         {/* Header: mobile stacks, desktop aligns */}
         <div className="flex flex-col gap-5 sm:gap-6 md:flex-row md:items-start md:justify-between">

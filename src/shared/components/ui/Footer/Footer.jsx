@@ -1,14 +1,11 @@
 export default function Footer() {
   const quickLinks = [
     { label: "Home", href: "/" },
-    { label: "Features", href: "/features" },
     { label: "Pricing", href: "/pricing" },
     { label: "About", href: "/about" },
   ];
 
   const otherLinks = [
-    { label: "Blog", href: "/blog" },
-    { label: "Case Study", href: "/case-studies" },
     { label: "FAQs", href: "/faqs" },
   ];
 

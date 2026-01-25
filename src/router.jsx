@@ -7,6 +7,7 @@ import { PortalDashboard } from "./routes/portal/PortalDashboard";
 import { AdminDashboard } from "./routes/admin/AdminDashboard";
 import About from "./routes/public/About";
 import ServiceDetailPage from "./routes/public/ServiceDetailPage";
+import GetInTouchPage from "./routes/public/GetInTouchPage";
 
 /**
  * Main router configuration
@@ -23,6 +24,7 @@ export function Router() {
         <Route index element={<HomePage />} />
         <Route path="/about" element={<About />} />
         <Route path="/services/:slug" element={<ServiceDetailPage />} />
+        <Route path="/get-in-touch" element={<GetInTouchPage />} />
         {/* Add more public routes here */}
       </Route>
 

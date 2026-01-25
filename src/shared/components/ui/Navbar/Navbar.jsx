@@ -1,6 +1,7 @@
 import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { Link } from "react-scroll";
 
 const cx = (...classes) => classes.filter(Boolean).join(" ");
 
@@ -8,9 +9,14 @@ const navLinkBase = "text-white/85 hover:text-amber transition font-medium";
 const navLinkActive = "text-amber";
 
 const SERVICES = [
-  { label: "Web Design", to: "/web-design" },
-  { label: "Social Media Marketing", to: "/social-media-marketing" },
-  { label: "Android App Development", to: "/android-app-development" },
+  { label: "Social Media Marketing", to: "/services/social-media-marketing" },
+  { label: "Website Development", to: "/services/website-development" },
+  { label: "Graphic Design", to: "/services/graphic-design" },
+  { label: "SEO Services", to: "/services/seo-services" },
+  { label: "Google Ads", to: "/services/google-ads" },
+  { label: "Ad Shoot", to: "/services/ad-shoot" },
+  { label: "Video Editing", to: "/services/video-editing" },
+  { label: "Public Relation", to: "/services/public-relation" },
 ];
 
 export default function Navbar() {
@@ -107,21 +113,7 @@ export default function Navbar() {
               </li>
 
               <li>
-                <NavLink
-                  to="/testimonials"
-                  className={({ isActive }) => cx(navLinkBase, isActive && navLinkActive)}
-                >
-                  Testimonials
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink
-                  to="/contact-us"
-                  className={({ isActive }) => cx(navLinkBase, isActive && navLinkActive)}
-                >
-                  Contact Us
-                </NavLink>
+                <Link to="testimonials" className="cursor-pointer text-white/85 hover:text-amber transition font-medium" smooth={true} duration={500}>Testimonials</Link>
               </li>
             </ul>
 
