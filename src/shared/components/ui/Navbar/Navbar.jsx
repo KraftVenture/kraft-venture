@@ -1,7 +1,7 @@
 import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import { Link } from "react-scroll";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
 
 const cx = (...classes) => classes.filter(Boolean).join(" ");
 
@@ -19,12 +19,24 @@ const SERVICES = [
   { label: "Public Relation", to: "/services/public-relation" },
 ];
 
+const TESTIMONIALS_SCROLL = {
+  to: "testimonials",
+  smooth: true,
+  duration: 500,
+  offset: -110, // adjust for navbar height
+  spy: true,
+  activeClass: "text-amber",
+};
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
 
   const location = useLocation();
+  const navigate = useNavigate();
   const drawerRef = useRef(null);
+
+  const isHome = location.pathname === "/";
 
   // Close on route change
   useEffect(() => {
@@ -44,7 +56,7 @@ export default function Navbar() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  // Close when clicking outside the drawer (overlay click)
+  // Close when clicking outside the drawer
   useEffect(() => {
     function onClickOutside(e) {
       if (!mobileOpen) return;
@@ -62,6 +74,32 @@ export default function Navbar() {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = original);
   }, [mobileOpen]);
+
+  // If we navigated to "/" specifically to scroll, scroll after render
+  useEffect(() => {
+    if (!isHome) return;
+    const pending = sessionStorage.getItem("kv_scroll_to");
+    if (pending === "testimonials") {
+      // let home render first
+      setTimeout(() => {
+        // react-scroll will find the Element by name
+        const evt = new CustomEvent("kv-scroll-testimonials");
+        window.dispatchEvent(evt);
+        sessionStorage.removeItem("kv_scroll_to");
+      }, 50);
+    }
+  }, [isHome]);
+
+  const handleTestimonialsClick = () => {
+    // Always close drawer for mobile
+    setMobileOpen(false);
+
+    if (isHome) return; // ScrollLink will handle it
+
+    // Not on home: go home then scroll
+    sessionStorage.setItem("kv_scroll_to", "testimonials");
+    navigate("/");
+  };
 
   return (
     <>
@@ -92,28 +130,50 @@ export default function Navbar() {
               <li>
                 <NavLink
                   to="/"
-                  className={({ isActive }) => cx(navLinkBase, isActive && navLinkActive)}
+                  className={({ isActive }) =>
+                    cx(navLinkBase, isActive && navLinkActive)
+                  }
                 >
                   Home
                 </NavLink>
               </li>
 
               <li className="relative group">
-                {/* Desktop dropdown on hover + click */}
                 <DesktopServices />
               </li>
 
               <li>
                 <NavLink
                   to="/about"
-                  className={({ isActive }) => cx(navLinkBase, isActive && navLinkActive)}
+                  className={({ isActive }) =>
+                    cx(navLinkBase, isActive && navLinkActive)
+                  }
                 >
                   About
                 </NavLink>
               </li>
 
+              {/* ✅ Testimonials: scroll on home, navigate+scroll otherwise */}
               <li>
-                <Link to="testimonials" className="cursor-pointer text-white/85 hover:text-amber transition font-medium" smooth={true} duration={500}>Testimonials</Link>
+                {isHome ? (
+                  <ScrollLink
+                    {...TESTIMONIALS_SCROLL}
+                    className={cx(
+                      "cursor-pointer",
+                      navLinkBase
+                    )}
+                  >
+                    Testimonials
+                  </ScrollLink>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleTestimonialsClick}
+                    className={cx(navLinkBase, "cursor-pointer")}
+                  >
+                    Testimonials
+                  </button>
+                )}
               </li>
             </ul>
 
@@ -153,13 +213,11 @@ export default function Navbar() {
         </nav>
       </header>
 
-      {/* ✅ Mobile Drawer Overlay */}
+      {/* Mobile Drawer Overlay */}
       {mobileOpen && (
         <div className="fixed inset-0 z-[999] lg:hidden">
-          {/* backdrop */}
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
-          {/* drawer */}
           <div
             ref={drawerRef}
             className="
@@ -209,8 +267,34 @@ export default function Navbar() {
                   ))}
                 </div>
               </MobileAccordion>
+
               <MobileNavItem to="/about" label="About" />
-              <MobileNavItem to="/testimonials" label="Testimonials" />
+
+              {/* ✅ Mobile Testimonials */}
+              {isHome ? (
+                <ScrollLink
+                  {...TESTIMONIALS_SCROLL}
+                  onClick={() => setMobileOpen(false)}
+                  className="
+                    block rounded-2xl px-4 py-3 text-sm font-medium transition
+                    text-white/85 hover:bg-white/5 hover:text-white cursor-pointer
+                  "
+                >
+                  Testimonials
+                </ScrollLink>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleTestimonialsClick}
+                  className="
+                    w-full text-left rounded-2xl px-4 py-3 text-sm font-medium transition
+                    text-white/85 hover:bg-white/5 hover:text-white cursor-pointer
+                  "
+                >
+                  Testimonials
+                </button>
+              )}
+
               <MobileNavItem to="/contact-us" label="Contact Us" />
             </div>
 
@@ -235,7 +319,7 @@ export default function Navbar() {
   );
 }
 
-/* ---------- Desktop Services dropdown (hover + click friendly) ---------- */
+/* ---------- Desktop Services dropdown ---------- */
 function DesktopServices() {
   const [open, setOpen] = useState(false);
   const btnRef = useRef(null);
@@ -278,7 +362,7 @@ function DesktopServices() {
           ref={menuRef}
           onMouseLeave={() => setOpen(false)}
           className="
-            absolute left-0 top-10 z-50 min-w-[240px]
+            absolute left-0 top-10 z-50 min-w-[260px]
             rounded-2xl border border-amber/30
             bg-black/95 backdrop-blur
             shadow-[0_20px_60px_rgba(0,0,0,0.7)]
