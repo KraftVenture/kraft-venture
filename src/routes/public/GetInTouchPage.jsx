@@ -34,7 +34,7 @@ export default function GetInTouchPage() {
     // await new Promise((r) => setTimeout(r, 700));
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_APP_URL}/submit`, {
+      const response = await axios.post(`${import.meta.env.VITE_APP_URL}submit`, {
         name: form.name,
         email: form.email,
         brand: form.brand,
