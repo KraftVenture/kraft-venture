@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 const cx = (...c) => c.filter(Boolean).join(" ");
@@ -30,9 +31,20 @@ export default function GetInTouchPage() {
     // ✅ Replace with your Supabase insert / API later.
     // For now, just simulate success.
     setStatus({ type: "loading", message: "Submitting..." });
-    await new Promise((r) => setTimeout(r, 700));
+    // await new Promise((r) => setTimeout(r, 700));
 
-    setStatus({ type: "success", message: "Thanks! We received your message. We'll reach out soon." });
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_APP_URL}/submit`, {
+        name: form.name,
+        email: form.email,
+        brand: form.brand,
+        subject: form.subject
+      });
+      setStatus({ type: "success", message: response.data.message });
+    } catch (err) {
+      const msg = err.response?.data?.message || "Something went wrong, Please try again";
+      setStatus({ type: "error", message: msg });
+    }
     setForm({ name: "", email: "", brand: "", subject: "", consent: false });
   };
 
@@ -128,11 +140,11 @@ export default function GetInTouchPage() {
                   className={cx(
                     "rounded-2xl border px-4 py-3 text-sm",
                     status.type === "success" &&
-                      "border-amber/30 bg-amber/10 text-white/90",
+                    "border-amber/30 bg-amber/10 text-white/90",
                     status.type === "error" &&
-                      "border-red-500/30 bg-red-500/10 text-white/90",
+                    "border-red-500/30 bg-red-500/10 text-white/90",
                     status.type === "loading" &&
-                      "border-white/10 bg-white/5 text-white/70"
+                    "border-white/10 bg-white/5 text-white/70"
                   )}
                 >
                   {status.message}
